@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse, Http404, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from .models import User
+from .models import Hobby
 
 # Create your views here.
 
@@ -12,7 +13,9 @@ def index(req):
 @csrf_exempt
 def register(req):
     if req.method == 'GET':
-        return render(req, 'MainApp/register.html')
+        hobbyList = Hobby.objects.all().values('id', 'hobbyName', 'hobbyInfo')
+
+        return render(req, 'MainApp/register.html', { 'hobbyList': hobbyList })
     else:
         raise Http404("Something went wrong !")
 

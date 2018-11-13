@@ -78,10 +78,18 @@
               </div>
             </div>
 
+            <div class="form-group">
+              <label for="hobbies"> Select hobbies: </label>
+              <div class="form-check">
+                {% for hobby in hobbyList %}
+                  <p> <input type="checkbox" class="form-check-input" id="{{ hobby.hobbyName }}" name="{{ hobby.hobbyName }}" value="{{ hobby.id }}"> {{ hobby.hobbyName }} </p>
+                {% endfor %}
+              </div>
+            </div>
+
             <div class="float-right d-flex justify-content-around mb-4">
               <button class="btn btn-success btn-md" id="register"> Register </button>
             </div>
-
           </form>
         </div>
       </div>
