@@ -13,7 +13,7 @@ def index(req):
 @csrf_exempt
 def register(req):
     if req.method == 'GET':
-        hobbyList = Hobby.objects.all().values('id', 'hobbyName', 'hobbyInfo')
+        hobbyList = Hobby.objects.all().values('hobbyName', 'hobbyInfo')
 
         return render(req, 'MainApp/register.html', { 'hobbyList': hobbyList })
     else:

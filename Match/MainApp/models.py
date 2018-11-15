@@ -2,7 +2,7 @@ from django.db import models
 
 # Create your models here.
 class Hobby(models.Model):
-    hobbyName = models.CharField(max_length=10)
+    hobbyName = models.CharField(max_length=10, primary_key=True)
     hobbyInfo = models.TextField(max_length=3000)
 
 class User(models.Model):

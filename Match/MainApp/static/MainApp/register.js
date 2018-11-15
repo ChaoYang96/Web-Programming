@@ -8,8 +8,6 @@ $(document).ready(function() {
     var email = $('#email').val();
     var pwd = $('#pwd').val();
 
-    alert(pwd);
-
     ajaxReq = {
       url: '/newUser/',
       type: 'POST',
