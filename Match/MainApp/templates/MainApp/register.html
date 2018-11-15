@@ -48,12 +48,12 @@
               <label for="gender"> Gender: </label>
 
               <div class="form-check">
-                <input type="radio" class="form-check-input" id="maleGender" name="gender" value="male" required>
+                <input type="radio" class="form-check-input" id="maleGender" name="gender" value="Male" required>
                 <label class="form-check-label" for="male"> Male </label>
               </div>
 
               <div class="form-check">
-                <input type="radio" class="form-check-input" id="femaleGender" name="gender" value="female" required>
+                <input type="radio" class="form-check-input" id="femaleGender" name="gender" value="Female" required>
                 <label class="form-check-label" for="female"> Female </label>
               </div>
             </div>
@@ -82,7 +82,7 @@
               <label for="hobbies"> Select hobbies: </label>
               <div class="form-check">
                 {% for hobby in hobbyList %}
-                  <p> <input type="checkbox" class="form-check-input" id="{{ hobby.hobbyName }}" name="{{ hobby.hobbyName }}" value="{{ hobby.id }}"> {{ hobby.hobbyName }} - {{ hobby.hobbyInfo }} </p>
+                  <p> <input type="checkbox" class="form-check-input" id="{{ hobby.hobbyName }}" name="hobby" value="{{ hobby.hobbyName }}"> {{ hobby.hobbyName }} - {{ hobby.hobbyInfo }} </p>
                 {% endfor %}
               </div>
             </div>
