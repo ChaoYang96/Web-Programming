@@ -20,16 +20,16 @@ def register(req):
         raise Http404("Something went wrong !")
 
 @csrf_exempt
-def validation(req):
+def newUser(req):
     if req.method == 'POST':
-        firstName = req.POST['firstName']
-        lastName = req.POST['lastName']
+        firstName = req.POST['fName']
+        lastName = req.POST['lName']
         age = req.POST['age']
         dob = req.POST['dob']
         gender = req.POST['gender']
         email = req.POST['email']
-        password = req.POST['password']
-        profilePic = req.POST['profilePic']
+        password = req.POST['pwd']
+        profilePic = req.POST['pic']
 
         user = User(firstName=firstName, lastName=lastName, age=age, dob=dob, gender=gender, email=email, password=password, profilePic=profilePic)
         user.save()
