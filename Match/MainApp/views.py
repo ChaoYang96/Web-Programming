@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse, Http404, JsonResponse
+from django.http import HttpResponse, Http404, JsonResponse, QueryDict
 from django.views.decorators.csrf import csrf_exempt
 from .models import User
 from .models import Hobby
@@ -29,13 +29,13 @@ def newUser(req):
         gender = req.POST['gender']
         email = req.POST['email']
         password = req.POST['pwd']
-        profilePic = req.POST['pic']
+        hobbies = req.POST.getlist('hobbies[]')
 
-        user = User(firstName=firstName, lastName=lastName, age=age, dob=dob, gender=gender, email=email, password=password, profilePic=profilePic)
-        user.save()
+        for hobby in hobbies:
+            print(hobby)
 
-        users = list(User.objects.all())
+        hobbyList = Hobby.objects.all().values('hobbyName', 'hobbyInfo')
 
-        return JsonResponse(users, safe=False)
+        return render(req, 'MainApp/register.html', { 'hobbyList': hobbies })
     else:
         raise Http404('Something went wrong')

@@ -1,7 +1,5 @@
 $(document).ready(function() {
-  $('#register').click(function(e) {
-    e.preventDefault();
-
+  $('#register').submit(function() {
     var hobbies = [];
 
     var fName = $('#firstName').val();
@@ -11,31 +9,28 @@ $(document).ready(function() {
     var gender = $('input[type=radio]:checked').val();
     var email = $('#email').val();
     var pwd = $('#pwd').val();
-    var pic = $('#profilePic').val();
 
-    $.each($("input[name='hobby']:checked"), function() {
+    $.each($("input[type=checkbox]:checked"), function() {
       hobbies.push($(this).val());
+    });
 
     ajaxReq = {
       url: '/newUser/',
       type: 'POST',
       dataType: 'json',
-      data: { 'fName': fName,
+      data: {
+              'fName': fName,
               'lName': lName,
               'age': age,
               'dob': dob,
               'gender': gender,
               'email': email,
               'pwd': pwd,
-              'pic': pic
-            },
-      success: function(data) {
-        alert("User profile created !");
-      }
-      error: function() {
-        alert("Something went wrong during the process !");
-      }
+              'hobbies[]': hobbies
+            }
     }
+
+    $.ajax(ajaxReq);
     });
   });
 });
