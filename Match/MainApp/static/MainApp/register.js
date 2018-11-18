@@ -1,5 +1,7 @@
 $(document).ready(function() {
-  $('#register').submit(function() {
+  $('#register').click(function(e) {
+    e.preventDefault();
+
     var hobbies = [];
 
     var fName = $('#firstName').val();
@@ -14,23 +16,26 @@ $(document).ready(function() {
       hobbies.push($(this).val());
     });
 
+    for (var i = 0; i < hobbies.length; i++) {
+      console.log(hobbies[i]);
+    }
+
     ajaxReq = {
       url: '/newUser/',
       type: 'POST',
       dataType: 'json',
       data: {
-              'fName': fName,
-              'lName': lName,
-              'age': age,
-              'dob': dob,
-              'gender': gender,
-              'email': email,
-              'pwd': pwd,
-              'hobbies[]': hobbies
-            }
+        'fName': fName,
+        'lName': lName,
+        'age': age,
+        'dob': dob,
+        'gender': gender,
+        'email': email,
+        'pwd': pwd,
+        'hobbies': hobbies
+      }
     }
 
     $.ajax(ajaxReq);
-    });
   });
 });

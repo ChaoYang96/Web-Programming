@@ -29,10 +29,9 @@ def newUser(req):
         gender = req.POST['gender']
         email = req.POST['email']
         password = req.POST['pwd']
-        hobbies = req.POST.getlist('hobbies[]')
+        hobbies = req.POST.get('hobbies[]')
 
-        for hobby in hobbies:
-            print(hobby)
+        print(firstName)
 
         hobbyList = Hobby.objects.all().values('hobbyName', 'hobbyInfo')
 
