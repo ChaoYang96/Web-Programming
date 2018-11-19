@@ -22,6 +22,7 @@ def register(req):
 @csrf_exempt
 def newUser(req):
     if req.method == 'POST':
+        h = QueryDict(req.body)
         firstName = req.POST['fName']
         lastName = req.POST['lName']
         age = req.POST['age']
@@ -29,12 +30,26 @@ def newUser(req):
         gender = req.POST['gender']
         email = req.POST['email']
         password = req.POST['pwd']
-        hobbies = req.POST.get('hobbies[]')
+        hobbies = req.POST.getlist('hobbies[]')
 
-        print(firstName)
+        #print(firstName)
+        print(hobbies)
 
-        hobbyList = Hobby.objects.all().values('hobbyName', 'hobbyInfo')
+        #profilePic to be resolved still
+        user = User(firstName=firstName, lastName=lastName, age=age, dob=dob, gender=gender, email=email, password=password)
+        user.save()
 
-        return render(req, 'MainApp/register.html', { 'hobbyList': hobbies })
+        for hobbyName in hobbies:
+            hobby = Hobby.objects.get(pk=hobbyName)
+            user.hobbies.add(hobby)
+            print(hobby.hobbyName)
+
+        #hobbyList = Hobby.objects.all().values('hobbyName', 'hobbyInfo')
+
+        users = list(User.objects.all().values('firstName', 'lastName', 'age', 'dob', 'gender', 'email', 'password', 'hobbies'))
+
+        #return render(req, 'MainApp/register.html', { 'hobbyList': hobbies })
+
+        return JsonResponse(users, safe=False)
     else:
         raise Http404('Something went wrong')
