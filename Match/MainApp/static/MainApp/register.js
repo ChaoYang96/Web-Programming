@@ -32,7 +32,11 @@ $(document).ready(function() {
         'gender': gender,
         'email': email,
         'pwd': pwd,
-        'hobbies': hobbies
+        'hobbies[]': hobbies
+      },
+      success: function(data){
+
+        alert("You have been successfully registered!");
       }
     }
 
